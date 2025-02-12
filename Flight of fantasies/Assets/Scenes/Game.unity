@@ -257,7 +257,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _poolCount: 12
   _autoExpande: 1
-  _delayTime: 0.62
   _prefab: {fileID: 1050403926}
 --- !u!4 &1461354467
 Transform:
@@ -268,7 +267,7 @@ Transform:
   m_GameObject: {fileID: 1461354465}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 5.64, z: -4800.0356}
+  m_LocalPosition: {x: 0, y: 5.7, z: -4800.0356}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -296,7 +295,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4916868673726101391, guid: a3894e83eeecdb44ead6e9ab5ff67c26, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 6.48
+      value: -9.52
       objectReference: {fileID: 0}
     - target: {fileID: 4916868673726101391, guid: a3894e83eeecdb44ead6e9ab5ff67c26, type: 3}
       propertyPath: m_LocalPosition.z

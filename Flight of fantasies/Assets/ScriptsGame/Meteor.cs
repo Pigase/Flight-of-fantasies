@@ -2,17 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 public class Meteor : MonoBehaviour
 {
-    [SerializeField] private float _speed = 3f; 
+    private float _randomSpeed;
+    private float _randomX;
+    private Vector3 _target;
     private void Update()
     {
         Move();
     }
 
+    private void OnEnable()
+    {
+        _randomSpeed = Random.Range(0.5f, 2);
+        _randomX = Random.Range(-2f, 2f);
+        _target = new Vector3(_randomX, -5.7f,0);
+    }
+
     private void Move()
     {
-        transform.Translate(0 * _speed * Time.deltaTime, -1 * _speed * Time.deltaTime, 0);
+        transform.position = Vector3.MoveTowards(transform.position, _target, _randomSpeed * Time.deltaTime);
     }
 }
