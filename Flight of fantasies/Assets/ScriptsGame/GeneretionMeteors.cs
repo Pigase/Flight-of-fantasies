@@ -9,14 +9,14 @@ public class GeneretionEnemies : MonoBehaviour
     [SerializeField] private Meteor _prefab;
 
     private PoolMono<Meteor> _pool;
-    private void Start()
+    private void Start()//создыем пул камней
     {
         _pool = new PoolMono<Meteor>(_prefab, _poolCount, transform);
         _pool.autoExpand = _autoExpande;
 
         CreateMeteor();
     }
-    private void CreateMeteor()
+    private void CreateMeteor()//вызываем метод взятие камней из пула который потом вызывает сам себя
     {
         float randomRange = Random.Range(-2f, 2f);
         float randomTimeSpawn = Random.Range(0.1f, 2f);
