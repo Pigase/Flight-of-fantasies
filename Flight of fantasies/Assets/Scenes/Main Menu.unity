@@ -2888,6 +2888,7 @@ GameObject:
   - component: {fileID: 936481332}
   - component: {fileID: 936481331}
   - component: {fileID: 936481334}
+  - component: {fileID: 936481335}
   m_Layer: 5
   m_Name: ButtonPlay
   m_TagString: Untagged
@@ -2959,7 +2960,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 936481334}
+      - m_Target: {fileID: 936481335}
         m_TargetAssemblyTypeName: SceneTransition, Assembly-CSharp
         m_MethodName: SceneReplacement
         m_Mode: 1
@@ -3019,6 +3020,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6e36721034588f443bf544ec6a89ee60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &936481335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 936481329}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2faadbdb501e0be41b4c404fa220d5f2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _scene: 1
