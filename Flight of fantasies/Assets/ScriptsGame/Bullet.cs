@@ -11,6 +11,11 @@ public class Bullet : MonoBehaviour
     {
         Move();
     }
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "BulletDestroyer")
+            gameObject.SetActive(false);
+    }
 
     private void Move()
     {

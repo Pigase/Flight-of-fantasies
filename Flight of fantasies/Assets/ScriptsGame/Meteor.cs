@@ -21,6 +21,12 @@ public class Meteor : MonoBehaviour
         _target = new Vector3(_randomX, -5.7f,0);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "MeteorDestroyer")
+        gameObject.SetActive(false);
+    }
+
     private void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, _target, _randomSpeed * Time.deltaTime);
