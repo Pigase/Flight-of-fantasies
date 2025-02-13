@@ -841,7 +841,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _poolCount: 12
-  _dalayTime: 0.1
+  _dalayTime: 0.4
   _autoExpande: 1
   _prefab: {fileID: 523872515}
 --- !u!1001 &3570961466745087319
