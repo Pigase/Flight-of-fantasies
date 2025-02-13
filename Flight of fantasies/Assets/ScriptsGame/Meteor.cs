@@ -12,21 +12,27 @@ public class Meteor : MonoBehaviour
 
     private float _randomSpeed;
     private float _randomX;
+    private float _randomScale;
+    private float _randomRotateSpeed;
     private Vector3 _target;
     private float _currentHealth;
 
     private void Update()
     {
         Move();
+        RotateMeteor();
     }
 
     private void OnEnable()
     {
         _randomSpeed = Random.Range(0.5f, 2);
         _randomX = Random.Range(-2f, 2f);
-        _target = new Vector3(_randomX, -5.7f,0);
+        _randomScale = Random.Range(0.25f, 0.6f);
+        _randomRotateSpeed = Random.Range(10f, 80f);
+        _target = new Vector3(_randomX, -6.16f,0);
         _currentHealth = _maxHealth;
         _texthHealth.text = _currentHealth.ToString();
+        transform.localScale = new Vector3(_randomScale, _randomScale, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -43,6 +49,10 @@ public class Meteor : MonoBehaviour
 
             collision.gameObject.SetActive(false);
         }
+    }
+    private void RotateMeteor()
+    {
+        transform.Rotate(0,0, -_randomRotateSpeed * Time.deltaTime);
     }
 
     private void Move()
