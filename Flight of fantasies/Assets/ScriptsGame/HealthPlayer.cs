@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,19 +10,21 @@ public class HealthPlayer : MonoBehaviour
     [SerializeField] private float _maxHealthPlayer;
     [SerializeField] private float _currentHealthPlayer;
     [SerializeField] private float _timeInvulnerability;
-
+    [SerializeField] private TextMeshProUGUI _textHealthPlayer;
+    [SerializeField] private EdgeCollider2D _colliderPlayer;
+ 
     private bool _isInvulnerability;
 
+    public static Action Died;
     private void Start()
     {
         _currentHealthPlayer = _maxHealthPlayer;
+        _textHealthPlayer.text = _currentHealthPlayer.ToString();
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        Debug.Log("fafaff");
         if (collision.tag == "Meteor")
         {
-            Debug.Log("meteor");
             Damage();
         }
     }
@@ -28,8 +32,19 @@ public class HealthPlayer : MonoBehaviour
     {
         if (_isInvulnerability == false)
         {
-            _currentHealthPlayer -= 10;
-            StartCoroutine(DoInvulnerability());
+            if (_currentHealthPlayer > 10)
+            {
+                _currentHealthPlayer -= 10;
+                _textHealthPlayer.text = _currentHealthPlayer.ToString();
+                StartCoroutine(DoInvulnerability());
+            }
+            else
+            {
+                _currentHealthPlayer = 0;
+                _textHealthPlayer.text = _currentHealthPlayer.ToString();
+                _colliderPlayer.enabled = false;
+                Died?.Invoke();
+            }
         }
     }
     IEnumerator DoInvulnerability()
