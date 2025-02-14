@@ -11,7 +11,6 @@ public class SpawnGamepad1 : MonoBehaviour
     [SerializeField] private float _X;
 
     private Vector2 _tempMove;
-    private Vector2 _tempBarier;
     private Vector2 pos;
 
     private void Start()
@@ -21,6 +20,9 @@ public class SpawnGamepad1 : MonoBehaviour
 
     private void Update()
     {
+        if (Time.deltaTime <= 0f)
+            return;
+
         Click();
         Barier();
     }
