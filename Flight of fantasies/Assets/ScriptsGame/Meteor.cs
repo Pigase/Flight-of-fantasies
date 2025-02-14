@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,9 @@ public class Meteor : MonoBehaviour
     private Vector3 _target;
     private float _currentHealth;
 
+    public static Action<float> Damage;
+
+
     private void Update()
     {
         Move();
@@ -25,10 +29,10 @@ public class Meteor : MonoBehaviour
 
     private void OnEnable()
     {
-        _randomSpeed = Random.Range(0.5f, 2);
-        _randomX = Random.Range(-2f, 2f);
-        _randomScale = Random.Range(0.25f, 0.6f);
-        _randomRotateSpeed = Random.Range(10f, 80f);
+        _randomSpeed = UnityEngine.Random.Range(0.5f, 2);
+        _randomX = UnityEngine.Random.Range(-2f, 2f);
+        _randomScale = UnityEngine.Random.Range(0.25f, 0.6f);
+        _randomRotateSpeed = UnityEngine.Random.Range(10f, 80f);
         _target = new Vector3(_randomX, -6.16f,0);
         _currentHealth = _maxHealth;
         _texthHealth.text = _currentHealth.ToString();
@@ -49,6 +53,11 @@ public class Meteor : MonoBehaviour
 
             collision.gameObject.SetActive(false);
         }
+    }
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "Player")
+            Damage?.Invoke(_currentHealth);
     }
     private void RotateMeteor()
     {

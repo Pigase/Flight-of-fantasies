@@ -21,20 +21,21 @@ public class HealthPlayer : MonoBehaviour
         _currentHealthPlayer = _maxHealthPlayer;
         _textHealthPlayer.text = _currentHealthPlayer.ToString();
     }
-    private void OnTriggerStay2D(Collider2D collision)
+    private void OnEnable()
     {
-        if (collision.tag == "Meteor")
-        {
-            Damage();
-        }
+        Meteor.Damage += GetDamage;
     }
-    private void Damage()
+    private void OnDisable()
+    {
+        Meteor.Damage -= GetDamage;
+    }
+    private void GetDamage(float damage)
     {
         if (_isInvulnerability == false)
         {
-            if (_currentHealthPlayer > 10)
+            if (_currentHealthPlayer > damage)
             {
-                _currentHealthPlayer -= 10;
+                _currentHealthPlayer -= damage;
                 _textHealthPlayer.text = _currentHealthPlayer.ToString();
                 StartCoroutine(DoInvulnerability());
             }
