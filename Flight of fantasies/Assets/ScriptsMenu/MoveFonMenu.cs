@@ -17,11 +17,13 @@ public class MoveFonMenu : MonoBehaviour
 
     private void Start()
     {
+        transform.parent.position = zeroVector;
         spriteSize = _sprite.bounds.size;
-        _minSizeSpriteY = -(spriteSize.y);
+        _minSizeSpriteY = spriteSize.y;
         Debug.Log(_minSizeSpriteY);
     }
-    private void Update()
+    
+    private void FixedUpdate()
     {
         MoveFon();
     }
@@ -31,8 +33,11 @@ public class MoveFonMenu : MonoBehaviour
         transform.Translate(Vector3.down * _speed * Time.deltaTime);
         if(transform.position.y <= 0 )
         {
-            if (-Vector2.Distance(zeroVector, transform.position) <= _minSizeSpriteY)
+            if (Vector2.Distance(zeroVector, transform.position) >= _minSizeSpriteY)
+            {
                 transform.position = new Vector2(transform.position.x, _restartPosY);
+                Debug.Log(_restartPosY);
+            }
         }
     }
 }
