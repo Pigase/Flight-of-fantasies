@@ -8,8 +8,10 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Meteor : MonoBehaviour
 {
-    [SerializeField] private float _maxHealth ;
+    [SerializeField] private float _maxHealth=10;
+    [SerializeField] private float _coefficientHealth;
     [SerializeField] private TextMeshProUGUI _texthHealth ;
+    [SerializeField] private GameManipulator _gameManipulator;
 
     private float _randomSpeed;
     private float _randomX;
@@ -19,6 +21,7 @@ public class Meteor : MonoBehaviour
     private float _currentHealth;
 
     public static Action<float> Damage;
+    public static Action DestroyMeteor;
 
 
     private void Update()
@@ -29,12 +32,14 @@ public class Meteor : MonoBehaviour
 
     private void OnEnable()
     {
+        DestroyMeteor?.Invoke();
         _randomSpeed = UnityEngine.Random.Range(0.5f, 2);
         _randomX = UnityEngine.Random.Range(-2f, 2f);
         _randomScale = UnityEngine.Random.Range(0.25f, 0.6f);
         _randomRotateSpeed = UnityEngine.Random.Range(10f, 80f);
+        
         _target = new Vector3(_randomX, -6.16f,0);
-        _currentHealth = _maxHealth;
+        _currentHealth = Mathf.Round(_maxHealth* Mathf.Pow((1 + _coefficientHealth), _gameManipulator._NumberOfMeteors));
         _texthHealth.text = _currentHealth.ToString();
         transform.localScale = new Vector3(_randomScale, _randomScale, 0);
     }
@@ -42,14 +47,21 @@ public class Meteor : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "MeteorDestroyer")
-        gameObject.SetActive(false);
+        {
+            DestroyMeteor?.Invoke();
+            gameObject.SetActive(false);
+        }
+
         if (collision.tag == "Bullet")
         {
             _currentHealth -= 2;
             _texthHealth.text = _currentHealth.ToString();
 
-            if (_currentHealth <= 0 )
+            if (_currentHealth <= 0)
+            {
+                DestroyMeteor?.Invoke();
                 gameObject.SetActive(false);
+            }
 
             collision.gameObject.SetActive(false);
         }
