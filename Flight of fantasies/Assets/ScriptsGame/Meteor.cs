@@ -8,11 +8,12 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Meteor : MonoBehaviour
 {
-    [SerializeField] private float _maxHealth=10;
+    [SerializeField] private float _firstHealth=10;
     [SerializeField] private float _coefficientHealth;
     [SerializeField] private TextMeshProUGUI _texthHealth ;
     [SerializeField] private GameManipulator _gameManipulator;
 
+    private float _maxHealth;
     private float _randomSpeed;
     private float _randomX;
     private float _randomScale;
@@ -22,6 +23,8 @@ public class Meteor : MonoBehaviour
 
     public static Action<float> Damage;
     public static Action DestroyMeteor;
+    public static Action Points;
+    public static Action<float> Crystals;
 
 
     private void Update()
@@ -39,13 +42,18 @@ public class Meteor : MonoBehaviour
         _randomRotateSpeed = UnityEngine.Random.Range(10f, 80f);
         
         _target = new Vector3(_randomX, -6.16f,0);
-        _currentHealth = Mathf.Round(_maxHealth* Mathf.Pow((1 + _coefficientHealth), _gameManipulator._NumberOfMeteors));
+        _maxHealth = Mathf.Round(_firstHealth * Mathf.Pow((1 + _coefficientHealth), _gameManipulator._NumberOfMeteors));//формула увелич хп
+        _currentHealth = _maxHealth;
         _texthHealth.text = _currentHealth.ToString();
         transform.localScale = new Vector3(_randomScale, _randomScale, 0);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        /*событие DestroyMeteor сообщает манипулятору об разрушении метеорита об разрушитель или когда 0 хп 
+         чтобы увелить кол-во пройденных метеоров и тем самым увеличить их хп.Еще одно событие Points
+        сообщает именно о разрушеннии метеора игроком чтобы прибавить очки,и еще одно событие передающие кол-во
+        кристалов(макс хп))*/
         if (collision.tag == "MeteorDestroyer")
         {
             DestroyMeteor?.Invoke();
@@ -59,6 +67,8 @@ public class Meteor : MonoBehaviour
 
             if (_currentHealth <= 0)
             {
+                Points?.Invoke();
+                Crystals?.Invoke(_maxHealth);
                 DestroyMeteor?.Invoke();
                 gameObject.SetActive(false);
             }

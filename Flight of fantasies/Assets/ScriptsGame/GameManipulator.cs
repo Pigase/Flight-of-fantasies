@@ -10,12 +10,15 @@ public class GameManipulator : MonoBehaviour
     [SerializeField] private GameObject _diedCanvas;
 
     [SerializeField] private float _numberOfMeteor = 0;
+    [SerializeField] private float _points = 0;
     public float _NumberOfMeteors => _numberOfMeteor;
+    public float _Points => _points;
 
     private void OnEnable()
     {
         HealthPlayer.Died += DiedScreen;
         Meteor.DestroyMeteor += UpNumberOfMeteor;
+        Meteor.Points += UpPoints;
 
     }
 
@@ -23,8 +26,14 @@ public class GameManipulator : MonoBehaviour
     {
         HealthPlayer.Died -= DiedScreen;
         Meteor.DestroyMeteor -= UpNumberOfMeteor;
+        Meteor.Points -= UpPoints;
     }
 
+    private void UpPoints()
+    {
+        _points++;
+
+    }
     private void UpNumberOfMeteor()
     {
         _numberOfMeteor++;
