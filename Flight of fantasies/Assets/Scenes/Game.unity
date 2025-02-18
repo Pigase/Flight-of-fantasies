@@ -270,7 +270,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8e439019c97125468b83a686078fdad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _textCrystalInGame: {fileID: 0}
+  _textCrystalInGame: {fileID: 27290817}
   _crystals: 0
 --- !u!1 &40012821
 GameObject:
