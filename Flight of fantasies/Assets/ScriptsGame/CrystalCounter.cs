@@ -15,11 +15,18 @@ public class CrystalCounter : MonoBehaviour
     private void OnEnable()
     {
         Meteor.Crystals += PlusCrystals;
+        GameManipulator.GetCrystals += SaveCrystals;
     }
 
     private void OnDisable()
     {
         Meteor.Crystals -= PlusCrystals;
+        GameManipulator.GetCrystals -= SaveCrystals;
+
+    }
+    private void SaveCrystals()
+    {
+        PlayerPrefs.SetFloat("Crystals",PlayerPrefs.GetFloat("Crystals",0)+_crystals);
     }
     private void PlusCrystals(float cristalsThisMeteor)
     {

@@ -14,6 +14,8 @@ public class GameManipulator : MonoBehaviour
     public float _NumberOfMeteors => _numberOfMeteor;
     public float _Points => _points;
 
+    public static Action GetCrystals;
+
     private void OnEnable()
     {
         HealthPlayer.Died += DiedScreen;
@@ -32,7 +34,6 @@ public class GameManipulator : MonoBehaviour
     private void UpPoints()
     {
         _points++;
-
     }
     private void UpNumberOfMeteor()
     {
@@ -40,12 +41,26 @@ public class GameManipulator : MonoBehaviour
     }
     private void DiedScreen()
     {
+        GetCrystals?.Invoke();
+
+        if (_points > PlayerPrefs.GetFloat("RecordPoints", 0))
+        {
+            PlayerPrefs.SetFloat("RecordPoints", _points);
+        }
+
         Time.timeScale = 0f;
         _diedCanvas.SetActive(true);
     }
 
     public void Home()
     {
+        GetCrystals?.Invoke();
+
+        if (_points > PlayerPrefs.GetFloat("RecordPoints", 0))
+        {
+            PlayerPrefs.SetFloat("RecordPoints", _points);
+        }
+
         SceneManager.LoadScene(0);
         Time.timeScale = 1.0f;
     }
