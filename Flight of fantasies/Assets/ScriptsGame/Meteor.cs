@@ -8,7 +8,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class Meteor : MonoBehaviour
 {
-    [SerializeField] private float _firstHealth=10;
+    [SerializeField] private float _firstHealth = 5;
     [SerializeField] private float _coefficientHealth;
     [SerializeField] private TextMeshProUGUI _texthHealth ;
     [SerializeField] private GameManipulator _gameManipulator;
@@ -42,7 +42,7 @@ public class Meteor : MonoBehaviour
         _randomRotateSpeed = UnityEngine.Random.Range(10f, 80f);
         
         _target = new Vector3(_randomX, -6.16f,0);
-        _maxHealth = Mathf.Round(_firstHealth * Mathf.Pow((1 + _coefficientHealth), _gameManipulator._NumberOfMeteors));//формула увелич хп
+        _maxHealth = GetHp();//формула увелич хп
         _currentHealth = _maxHealth;
         _texthHealth.text = _currentHealth.ToString();
         transform.localScale = new Vector3(_randomScale, _randomScale, 0);
@@ -62,7 +62,7 @@ public class Meteor : MonoBehaviour
 
         if (collision.tag == "Bullet")
         {
-            _currentHealth -= 2;
+            _currentHealth -= PlayerPrefs.GetFloat("LevelDamage", 1);
             _texthHealth.text = _currentHealth.ToString();
 
             if (_currentHealth <= 0)
@@ -80,6 +80,14 @@ public class Meteor : MonoBehaviour
     {
         if (collision.tag == "Player")
             Damage?.Invoke(_currentHealth);
+    }
+    private float GetHp()
+    {
+        float minRan = Mathf.Round(_gameManipulator._NumberOfMeteors*0.6f);
+        float maxRan = Mathf.Round(_gameManipulator._NumberOfMeteors * 1.4f);
+        float randomSpread = Mathf.Round(UnityEngine.Random.Range(minRan, maxRan));
+        float HP = _firstHealth + randomSpread;
+        return HP;
     }
     private void RotateMeteor()
     {
