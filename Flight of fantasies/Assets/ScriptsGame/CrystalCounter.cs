@@ -6,7 +6,9 @@ using UnityEngine;
 public class CrystalCounter : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _textCrystalInGame;
+    [SerializeField] private CrystalCounter _crystalCounter;
     [SerializeField] private float _crystals = 0;
+    public float _Crystals => _crystals;
 
     private void Update()
     {
@@ -15,27 +17,19 @@ public class CrystalCounter : MonoBehaviour
     private void OnEnable()
     {
         Meteor.Crystals += PlusCrystals;
-        GameManipulator.GetCrystals += SaveCrystals;
     }
 
     private void OnDisable()
     {
         Meteor.Crystals -= PlusCrystals;
-        GameManipulator.GetCrystals -= SaveCrystals;
-
-    }
-    private void SaveCrystals()
-    {
-        PlayerPrefs.SetFloat("Crystals",PlayerPrefs.GetFloat("Crystals",0)+_crystals);
     }
     private void PlusCrystals(float cristalsThisMeteor)
     {
-        
         _crystals += cristalsThisMeteor;
     }
     private void ViewCrystals()
     {
-        _textCrystalInGame.text = _crystals.ToString();
+        _textCrystalInGame.text = _crystalCounter._Crystals.ToString();
 
     }
 }
