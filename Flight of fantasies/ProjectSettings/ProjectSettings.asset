@@ -773,7 +773,13 @@ PlayerSettings:
   XboxOneOverrideIdentityName: 
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
-  cloudServicesEnabled: {}
+  cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -793,11 +799,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 0
   windowsGamepadBackendHint: 0
-  cloudProjectId: 5cbaaf63-c36d-413e-a902-e40e0f69994f
+  cloudProjectId: 59a846c8-12b1-41a9-bb0c-2a61608df274
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: Flight of fantasies 2025-02-12_00-43-50
-  organizationId: pigase
+  projectName: Flight of fantasies
+  organizationId: svinofrol
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
