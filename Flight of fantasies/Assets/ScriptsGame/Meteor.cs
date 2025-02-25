@@ -38,7 +38,7 @@ public class Meteor : MonoBehaviour
         DestroyMeteor?.Invoke();
         _randomSpeed = UnityEngine.Random.Range(0.5f, 2);
         _randomX = UnityEngine.Random.Range(-2f, 2f);
-        _randomScale = UnityEngine.Random.Range(0.25f, 0.6f);
+        _randomScale = UnityEngine.Random.Range(1.5f, 2.5f);
         _randomRotateSpeed = UnityEngine.Random.Range(10f, 80f);
         
         _target = new Vector3(_randomX, -6.16f,0);
