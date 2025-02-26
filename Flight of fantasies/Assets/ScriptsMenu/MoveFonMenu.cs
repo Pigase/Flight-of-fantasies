@@ -15,7 +15,7 @@ public class MoveFonMenu : MonoBehaviour
 
     private void Start()
     {
-        CheckPos();
+        CheckPosAndScale();
     }
     
     private void FixedUpdate()
@@ -32,11 +32,12 @@ public class MoveFonMenu : MonoBehaviour
             transform.position = new Vector2(transform.position.x, maxPosY);
        }
     }
-    private void CheckPos()
+    private void CheckPosAndScale()
     {
+
         minPosY = transform.position.y;
         maxPosY = transform.position.y;
-
+       // Vector3 minScale  = transform.localScale;
         for (int i = 0; i < _sprite.Length; i++)
         {
             if (_sprite[i].transform.position.y > maxPosY) 
@@ -46,9 +47,12 @@ public class MoveFonMenu : MonoBehaviour
             else 
             {
                 minPosY = _sprite[i].transform.position.y;
+
+               // minScale =  _sprite[i].transform.localScale;
             }
         }
 
         minPosY -= maxPosY;
+       // transform.localScale = minScale;
     }
 }
