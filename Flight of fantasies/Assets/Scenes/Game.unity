@@ -2377,7 +2377,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -638.28955, y: 1427.397, z: -27791.998}
-  m_LocalScale: {x: 10.891314, y: 11.208458, z: 308.8}
+  m_LocalScale: {x: 26.69, y: 27.98, z: 308.8}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1561820736}
@@ -2423,7 +2423,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 60f9e4ddfa8d8b84e8b1cf5f14e350f3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cb2ef4d2c4b2d384db7282f0a44a93ea, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -2616,14 +2616,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 0.43529412, g: 0.9764706, b: 0.48979944, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: aae293b28566580459efb691855c384a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ec7b1609f1083d44da27301faa590acc, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
