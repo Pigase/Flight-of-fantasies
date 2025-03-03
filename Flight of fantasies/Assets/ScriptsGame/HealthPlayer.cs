@@ -12,6 +12,7 @@ public class HealthPlayer : MonoBehaviour
     [SerializeField] private float _timeInvulnerability;
     [SerializeField] private TextMeshProUGUI _textHealthPlayer;
     [SerializeField] private EdgeCollider2D _colliderPlayer;
+    [SerializeField] private AudioSource _audioDamage;
  
     private bool _isInvulnerability;
 
@@ -38,6 +39,7 @@ public class HealthPlayer : MonoBehaviour
             {
                 _currentHealthPlayer -= damage;
                 _textHealthPlayer.text = _currentHealthPlayer.ToString();
+                _audioDamage.Play();
                 StartCoroutine(DoInvulnerability());
             }
             else

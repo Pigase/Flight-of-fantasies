@@ -8,6 +8,7 @@ public class GeneretionBullets : MonoBehaviour
     [SerializeField] private float _dalayTime;
     [SerializeField] private bool _autoExpande = true;
     [SerializeField] private Bullet _prefab;
+    [SerializeField] private AudioSource _shootSound;
 
     private PoolMono<Bullet> _pool;
     private void Start()//создыем пул камней
@@ -24,6 +25,7 @@ public class GeneretionBullets : MonoBehaviour
         meteor.transform.position = transform.position;
         meteor.transform.parent = null;
         meteor.transform.position = new Vector3(transform.position.x, transform.position.y, 0);
+        _shootSound.Play();
         Invoke("CreateBullet", _dalayTime);
     }
 

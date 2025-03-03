@@ -37,7 +37,6 @@ public class MoveFonMenu : MonoBehaviour
 
         minPosY = transform.position.y;
         maxPosY = transform.position.y;
-       // Vector3 minScale  = transform.localScale;
         for (int i = 0; i < _sprite.Length; i++)
         {
             if (_sprite[i].transform.position.y > maxPosY) 
@@ -48,11 +47,9 @@ public class MoveFonMenu : MonoBehaviour
             {
                 minPosY = _sprite[i].transform.position.y;
 
-               // minScale =  _sprite[i].transform.localScale;
             }
         }
 
         minPosY -= maxPosY;
-       // transform.localScale = minScale;
     }
 }
