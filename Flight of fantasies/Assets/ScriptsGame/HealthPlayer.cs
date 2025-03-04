@@ -17,6 +17,7 @@ public class HealthPlayer : MonoBehaviour
     private bool _isInvulnerability;
 
     public static Action Died;
+
     private void Start()
     {
         _maxHealthPlayer = 30 + (20*PlayerPrefs.GetFloat("LevelHealth", 1));
@@ -53,8 +54,10 @@ public class HealthPlayer : MonoBehaviour
     }
     IEnumerator DoInvulnerability()
     {
-        _isInvulnerability= true;
+        gameObject?.GetComponent<Animator>().SetTrigger("Damage");
+        _isInvulnerability = true;
         yield return new WaitForSeconds(_timeInvulnerability);
+        gameObject?.GetComponent<Animator>().SetTrigger("EndDamage");
         _isInvulnerability = false;
     }
 }

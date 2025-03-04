@@ -7,16 +7,17 @@ using UnityEngine.SceneManagement;
 
 public class GameManipulator : MonoBehaviour
 {
-    [SerializeField] private GameObject _diedCanvas;
     [SerializeField] private CrystalCounter _crystalCounter;
     [SerializeField] private float _numberOfMeteor = 1;
     [SerializeField] private float _points = 0;
+    [SerializeField] private GameObject _player;
+
     public float _NumberOfMeteors => _numberOfMeteor;
     public float _Points => _points;
 
-
     private void OnEnable()
     {
+        HealthPlayer.Died += StartDiedClip;
         HealthPlayer.Died += DiedScreen;
         Meteor.DestroyMeteor += UpNumberOfMeteor;
         Meteor.Points += UpPoints;
@@ -25,11 +26,20 @@ public class GameManipulator : MonoBehaviour
 
     private void OnDisable()
     {
+        HealthPlayer.Died -= StartDiedClip;
         HealthPlayer.Died -= DiedScreen;
         Meteor.DestroyMeteor -= UpNumberOfMeteor;
         Meteor.Points -= UpPoints;
     }
+    private void DiedScreen()
+    {
+        PlayerPrefs.SetFloat("Crystals", PlayerPrefs.GetFloat("Crystals", 0) + _crystalCounter._Crystals);
 
+        if (_points > PlayerPrefs.GetFloat("RecordPoints", 0))
+        {
+            PlayerPrefs.SetFloat("RecordPoints", _points);
+        }
+    }
     private void UpPoints()
     {
         _points++;
@@ -38,17 +48,11 @@ public class GameManipulator : MonoBehaviour
     {
         _numberOfMeteor++;
     }
-    private void DiedScreen()
+    private void StartDiedClip()
     {
-        PlayerPrefs.SetFloat("Crystals", PlayerPrefs.GetFloat("Crystals", 0) +  _crystalCounter._Crystals);
+        Animator animator = _player.GetComponent<Animator>();
 
-        if (_points > PlayerPrefs.GetFloat("RecordPoints", 0))
-        {
-            PlayerPrefs.SetFloat("RecordPoints", _points);
-        }
-
-        Time.timeScale = 0f;
-        _diedCanvas.SetActive(true);
+        animator?.SetTrigger("Died");
     }
 
     public void HomeAndSave()

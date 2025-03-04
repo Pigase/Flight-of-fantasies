@@ -12,19 +12,17 @@ public class SpawnGamepad1 : MonoBehaviour
 
     private Vector2 _tempMove;
     private Vector2 pos;
-
-    private void Start()
-    {
-        
-    }
+    private bool playerLive = true;
 
     private void Update()
     {
         if (Time.deltaTime <= 0f)
             return;
-
-        Click();
-        Barier();
+        if (playerLive)
+        {
+            Click();
+            Barier();
+        }
     }
 
     private void Barier()
@@ -52,5 +50,18 @@ public class SpawnGamepad1 : MonoBehaviour
             _tempMove = touchPos1;
         }
       
+    }
+    private void PlayerDied()
+    {
+        playerLive = false;
+    }
+    private void OnEnable()
+    {
+        HealthPlayer.Died += PlayerDied;
+    }
+
+    private void OnDisable()
+    {
+        HealthPlayer.Died -= PlayerDied;
     }
 }
