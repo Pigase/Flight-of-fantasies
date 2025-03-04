@@ -16,6 +16,9 @@ public class HealthPlayer : MonoBehaviour
  
     private bool _isInvulnerability;
 
+    public bool IsInvulnerability => _isInvulnerability;
+
+
     public static Action Died;
 
     private void Start()

@@ -12,6 +12,7 @@ public class Meteor : MonoBehaviour
     [SerializeField] private float _coefficientHealth;
     [SerializeField] private TextMeshProUGUI _texthHealth ;
     [SerializeField] private GameManipulator _gameManipulator;
+    [SerializeField] private HealthPlayer _healthPlayer;
 
     private float _maxHealth;
     private float _randomSpeed;
@@ -78,8 +79,13 @@ public class Meteor : MonoBehaviour
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player")
+        if (collision.tag == "Player" && _healthPlayer.IsInvulnerability == false)
+        {
+            DestroyMeteor?.Invoke();
+            Points?.Invoke();
+            gameObject.SetActive(false);
             Damage?.Invoke(_currentHealth);
+        }
     }
     private float GetHp()
     {
