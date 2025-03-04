@@ -68,6 +68,7 @@ public class Meteor : MonoBehaviour
 
             if (_currentHealth <= 0)
             {
+                gameObject?.GetComponent<AudioSource>().Play();
                 Points?.Invoke();
                 Crystals?.Invoke(_maxHealth);
                 DestroyMeteor?.Invoke();

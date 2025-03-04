@@ -51,6 +51,7 @@ public class HealthPlayer : MonoBehaviour
                 _currentHealthPlayer = 0;
                 _textHealthPlayer.text = _currentHealthPlayer.ToString();
                 _colliderPlayer.enabled = false;
+                _audioDamage.Play();
                 Died?.Invoke();
             }
         }
