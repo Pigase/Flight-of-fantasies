@@ -13,6 +13,9 @@ public class Meteor : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _texthHealth ;
     [SerializeField] private GameManipulator _gameManipulator;
     [SerializeField] private HealthPlayer _healthPlayer;
+    [SerializeField] private AudioSource _dieSound;
+
+
 
     private float _maxHealth;
     private float _randomSpeed;
@@ -68,7 +71,8 @@ public class Meteor : MonoBehaviour
 
             if (_currentHealth <= 0)
             {
-                gameObject?.GetComponent<AudioSource>().Play();
+                _dieSound.Play();
+                //gameObject?.GetComponent<AudioSource>().Play();
                 Points?.Invoke();
                 Crystals?.Invoke(_maxHealth);
                 DestroyMeteor?.Invoke();

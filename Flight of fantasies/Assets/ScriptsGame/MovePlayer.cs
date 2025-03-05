@@ -7,6 +7,8 @@ using static TMPro.SpriteAssetUtilities.TexturePacker_JsonArray;
 
 public class SpawnGamepad1 : MonoBehaviour
 {
+    [SerializeField] private GameObject _rightObgect;
+    [SerializeField] private GameObject _upObgect;
     [SerializeField] private float _Y;
     [SerializeField] private float _X;
 
@@ -14,6 +16,11 @@ public class SpawnGamepad1 : MonoBehaviour
     private Vector2 pos;
     private bool playerLive = true;
 
+    private void Start()
+    {
+        _Y = _upObgect.transform.position.y;
+        _X = _rightObgect.transform.position.x;
+    }
     private void Update()
     {
         if (Time.deltaTime <= 0f)
