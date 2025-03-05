@@ -14,8 +14,7 @@ public class Meteor : MonoBehaviour
     [SerializeField] private GameManipulator _gameManipulator;
     [SerializeField] private HealthPlayer _healthPlayer;
     [SerializeField] private AudioSource _dieSound;
-
-
+    [SerializeField] private GameObject _right;
 
     private float _maxHealth;
     private float _randomSpeed;
@@ -41,7 +40,8 @@ public class Meteor : MonoBehaviour
     {
         DestroyMeteor?.Invoke();
         _randomSpeed = UnityEngine.Random.Range(0.5f, 2);
-        _randomX = UnityEngine.Random.Range(-2f, 2f);
+        float barrier = _right.transform.position.x;
+        _randomX = UnityEngine.Random.Range(-barrier, barrier);
         _randomScale = UnityEngine.Random.Range(1.5f, 2.5f);
         _randomRotateSpeed = UnityEngine.Random.Range(10f, 80f);
         
