@@ -13,7 +13,8 @@ public class HealthPlayer : MonoBehaviour
     [SerializeField] private TextMeshProUGUI _textHealthPlayer;
     [SerializeField] private EdgeCollider2D _colliderPlayer;
     [SerializeField] private AudioSource _audioDamage;
- 
+
+    private bool _die = false;
     private bool _isInvulnerability;
 
     public bool IsInvulnerability => _isInvulnerability;
@@ -39,7 +40,7 @@ public class HealthPlayer : MonoBehaviour
     {
         if (_isInvulnerability == false)
         {
-            if (_currentHealthPlayer > damage)
+            if (_currentHealthPlayer > damage )
             {
                 _currentHealthPlayer -= damage;
                 _textHealthPlayer.text = _currentHealthPlayer.ToString();
@@ -48,11 +49,15 @@ public class HealthPlayer : MonoBehaviour
             }
             else
             {
-                _currentHealthPlayer = 0;
-                _textHealthPlayer.text = _currentHealthPlayer.ToString();
-                _colliderPlayer.enabled = false;
-                _audioDamage.Play();
-                Died?.Invoke();
+                if (_die == false)
+                {
+                    _die = true;
+                    _currentHealthPlayer = 0;
+                    _textHealthPlayer.text = _currentHealthPlayer.ToString();
+                    _colliderPlayer.enabled = false;
+                    _audioDamage.Play();
+                    Died?.Invoke();
+                }
             }
         }
     }

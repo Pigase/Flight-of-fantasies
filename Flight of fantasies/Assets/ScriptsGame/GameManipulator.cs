@@ -34,6 +34,7 @@ public class GameManipulator : MonoBehaviour
     private void DiedScreen()
     {
         PlayerPrefs.SetFloat("Crystals", PlayerPrefs.GetFloat("Crystals", 0) + _crystalCounter._Crystals);
+        Debug.Log(PlayerPrefs.GetFloat("Crystals", 0));
 
         if (_points > PlayerPrefs.GetFloat("RecordPoints", 0))
         {
