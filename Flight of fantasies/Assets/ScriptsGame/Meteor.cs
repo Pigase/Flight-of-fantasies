@@ -23,12 +23,18 @@ public class Meteor : MonoBehaviour
     private float _randomRotateSpeed;
     private Vector3 _target;
     private float _currentHealth;
+    private bool _live = true;
+    private Animator _anim;
 
     public static Action<float> Damage;
     public static Action DestroyMeteor;
     public static Action Points;
     public static Action<float> Crystals;
 
+    private void Start()
+    {
+        _anim = gameObject?.GetComponent<Animator>();
+    }
 
     private void Update()
     {
@@ -38,6 +44,7 @@ public class Meteor : MonoBehaviour
 
     private void OnEnable()
     {
+        _live = true;
         DestroyMeteor?.Invoke();
         _randomSpeed = UnityEngine.Random.Range(0.5f, 2);
         float barrier = _right.transform.position.x;
@@ -58,38 +65,45 @@ public class Meteor : MonoBehaviour
          чтобы увелить кол-во пройденных метеоров и тем самым увеличить их хп.Еще одно событие Points
         сообщает именно о разрушеннии метеора игроком чтобы прибавить очки,и еще одно событие передающие кол-во
         кристалов(макс хп))*/
-        if (collision.tag == "MeteorDestroyer")
+        if(_live)
         {
-            DestroyMeteor?.Invoke();
-            gameObject.SetActive(false);
-        }
-
-        if (collision.tag == "Bullet")
-        {
-            _currentHealth -= PlayerPrefs.GetFloat("LevelDamage", 1);
-            _texthHealth.text = _currentHealth.ToString();
-
-            if (_currentHealth <= 0)
+            if (collision.tag == "MeteorDestroyer")
             {
-                _dieSound.Play();
-                //gameObject?.GetComponent<AudioSource>().Play();
-                Points?.Invoke();
-                Crystals?.Invoke(_maxHealth);
                 DestroyMeteor?.Invoke();
                 gameObject.SetActive(false);
             }
 
-            collision.gameObject.SetActive(false);
+            if (collision.tag == "Bullet")
+            {
+                _currentHealth -= PlayerPrefs.GetFloat("LevelDamage", 1);
+                _texthHealth.text = _currentHealth.ToString();
+
+                if (_currentHealth <= 0)
+                {
+                    _dieSound.Play();
+                    //gameObject?.GetComponent<AudioSource>().Play();
+                    Points?.Invoke();
+                    Crystals?.Invoke(_maxHealth);
+                    DestroyMeteor?.Invoke();
+                    _anim.SetTrigger("Died");
+                }
+
+                collision.gameObject.SetActive(false);
+            }
         }
+
     }
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.tag == "Player" && _healthPlayer.IsInvulnerability == false)
+        if(_live)
         {
-            DestroyMeteor?.Invoke();
-            Points?.Invoke();
-            gameObject.SetActive(false);
-            Damage?.Invoke(_currentHealth);
+            if (collision.tag == "Player" && _healthPlayer.IsInvulnerability == false)
+            {
+                DestroyMeteor?.Invoke();
+                Points?.Invoke();
+                _anim.SetTrigger("Died");
+                Damage?.Invoke(_currentHealth);
+            }
         }
     }
     private float GetHp()
@@ -108,5 +122,15 @@ public class Meteor : MonoBehaviour
     private void Move()
     {
         transform.position = Vector3.MoveTowards(transform.position, _target, _randomSpeed * Time.deltaTime);
+    }
+
+    private void DeathMeteor()
+    {
+        _live = false;
+    }
+
+    private void ActiveMeteorFalse()
+    {
+        gameObject.SetActive(false);
     }
 }
