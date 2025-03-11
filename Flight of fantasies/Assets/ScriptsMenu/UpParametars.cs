@@ -33,19 +33,19 @@ public class UpParametars : MonoBehaviour
     }
     private void ViewUpParameters()
     {
-        _textUpHealth.text = (PlayerPrefs.GetFloat("LevelHealth", 1)*50) + "<color=green>+30</color>";
-        _textUpSpeed.text = 95+(PlayerPrefs.GetFloat("LevelSpeed", 1)*5) + "%<color=green>+5%</color>";
+        _textUpHealth.text = (PlayerPrefs.GetFloat("LevelHealth", 1)*50) + "<color=green>+50</color>";
+        _textUpSpeed.text = 96.5+(PlayerPrefs.GetFloat("LevelSpeed", 1)*3.5) + "%<color=green>+3.5%</color>";
         _textUpDamage.text = PlayerPrefs.GetFloat("LevelDamage", 1) + "<color=green>+1</color>";
     }
     private void ViewPrise()
     {
-        _textPriseHealth.text = (PlayerPrefs.GetFloat("LevelHealth", 1) * 50).ToString();
-        _textPriseSpeed.text = (PlayerPrefs.GetFloat("LevelSpeed", 1) * 100).ToString();
-        _textPriseDamage.text = (PlayerPrefs.GetFloat("LevelDamage", 1) * 1000).ToString();
+        _textPriseHealth.text = ((PlayerPrefs.GetFloat("LevelHealth", 1) * 50)-30).ToString();
+        _textPriseSpeed.text = ((PlayerPrefs.GetFloat("LevelSpeed", 1) * 70)-50).ToString();
+        _textPriseDamage.text = ((PlayerPrefs.GetFloat("LevelDamage", 1) * 150)-130).ToString();
     }
     public void UpHealth()
     {
-        _temp = (PlayerPrefs.GetFloat("LevelHealth", 1) * 100000);
+        _temp = (PlayerPrefs.GetFloat("LevelHealth", 1) * 50)-30;
         if (PlayerPrefs.GetFloat("Crystals", 0) >= _temp)
         {
             PlayerPrefs.SetFloat("Crystals", PlayerPrefs.GetFloat("Crystals", 0) - _temp);
@@ -54,7 +54,7 @@ public class UpParametars : MonoBehaviour
     }
     public void UpSpeed()
     {
-        _temp = (PlayerPrefs.GetFloat("LevelSpeed", 1) * 100000);
+        _temp = (PlayerPrefs.GetFloat("LevelSpeed", 1) * 70)-50;
         if (PlayerPrefs.GetFloat("Crystals",0) >= _temp)
         {
             PlayerPrefs.SetFloat("Crystals", PlayerPrefs.GetFloat("Crystals", 0)-_temp);
@@ -63,7 +63,7 @@ public class UpParametars : MonoBehaviour
     }
     public void UpDamage()
     {
-        _temp = (PlayerPrefs.GetFloat("LevelDamage", 1) * 100000);
+        _temp = (PlayerPrefs.GetFloat("LevelDamage", 1) * 150)-130;
         if (PlayerPrefs.GetFloat("Crystals", 0) >= _temp)
         {
             PlayerPrefs.SetFloat("Crystals", PlayerPrefs.GetFloat("Crystals", 0) - _temp);

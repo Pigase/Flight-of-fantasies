@@ -45,7 +45,7 @@ public class Meteor : MonoBehaviour
     private void OnEnable()
     {
         _live = true;
-        DestroyMeteor?.Invoke();
+        //DestroyMeteor?.Invoke();
         _randomSpeed = UnityEngine.Random.Range(0.5f, 2);
         float barrier = _right.transform.position.x;
         _randomX = UnityEngine.Random.Range(-barrier, barrier);
@@ -81,7 +81,6 @@ public class Meteor : MonoBehaviour
                 if (_currentHealth <= 0)
                 {
                     _dieSound.Play();
-                    //gameObject?.GetComponent<AudioSource>().Play();
                     Points?.Invoke();
                     Crystals?.Invoke(_maxHealth);
                     DestroyMeteor?.Invoke();
@@ -108,8 +107,10 @@ public class Meteor : MonoBehaviour
     }
     private float GetHp()
     {
+        Debug.Log(_gameManipulator._NumberOfMeteors);
         float minRan = Mathf.Round(_gameManipulator._NumberOfMeteors*0.6f);
-        float maxRan = Mathf.Round(_gameManipulator._NumberOfMeteors * 1.4f);
+        //float maxRan = Mathf.Round(_gameManipulator._NumberOfMeteors * 1.4f);
+        float maxRan = Mathf.Round(_gameManipulator._NumberOfMeteors);
         float randomSpread = Mathf.Round(UnityEngine.Random.Range(minRan, maxRan));
         float HP = _firstHealth + randomSpread;
         return HP;

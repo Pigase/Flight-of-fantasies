@@ -24,7 +24,7 @@ public class HealthPlayer : MonoBehaviour
 
     private void Start()
     {
-        _maxHealthPlayer = 30 + (20*PlayerPrefs.GetFloat("LevelHealth", 1));
+        _maxHealthPlayer = (50*PlayerPrefs.GetFloat("LevelHealth", 1));
         _currentHealthPlayer = _maxHealthPlayer;
         _textHealthPlayer.text = _currentHealthPlayer.ToString();
     }

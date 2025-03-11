@@ -24,7 +24,7 @@ public class GeneretionEnemies : MonoBehaviour
     private void CreateMeteor()//вызываем метод взятие камней из пула который потом вызывает сам себя
     {
         float randomRange = Random.Range(-_barrier, _barrier);
-        float randomTimeSpawn = Random.Range(0.1f, 2f);
+        float randomTimeSpawn = Random.Range(0.2f, 2f);
         var meteor = _pool.GetFreeElement();
         meteor.transform.position = transform.position;
         meteor.transform.parent = null;

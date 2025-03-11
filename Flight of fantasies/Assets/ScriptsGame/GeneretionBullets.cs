@@ -19,7 +19,7 @@ public class GeneretionBullets : MonoBehaviour
         _pool = new PoolMono<Bullet>(_prefab, _poolCount, transform);
         _pool.autoExpand = _autoExpande;
 
-        _dalayTime = 0.51f-(0.01f*PlayerPrefs.GetFloat("LevelSpeed", 1));
+        _dalayTime = 0.41f-(0.01f*PlayerPrefs.GetFloat("LevelSpeed", 1));
         CreateBullet();
     }
     private void CreateBullet()//вызываем метод взятие камней из пула который потом вызывает сам себя
